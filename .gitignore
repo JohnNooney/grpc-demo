@@ -398,6 +398,8 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Directories
-*/bin/
-*/obj/
-*/TestResults/
+Client/bin/
+Client/obj/
+Client/TestResults/
+
+Server/obj/
