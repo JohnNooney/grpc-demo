@@ -403,3 +403,5 @@ Client/obj/
 Client/TestResults/
 
 Server/obj/
+
+*.cache
