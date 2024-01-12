@@ -3,12 +3,12 @@ using Grpc.Net.Client;
 using Client;
 
 // The port number must match the port of the gRPC server.
-using var channel = GrpcChannel.ForAddress("https://localhost:7173");
+using var channel = GrpcChannel.ForAddress("https://localhost:7104");
 
 var client = new Greeter.GreeterClient(channel);
 
 var reply = await client.SayHelloAsync(
-                  new HelloRequest { Name = "GreeterClient" });
+                  new HelloRequest { Name = "John" });
 
 Console.WriteLine("Greeting: " + reply.Message);
 Console.WriteLine("Press any key to exit...");
