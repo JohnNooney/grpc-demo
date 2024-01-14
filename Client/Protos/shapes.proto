@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Client";
+
+package shapes;
+
+service AreaCalculator {
+  rpc CalculateArea(Shape) returns (AreaResponse);
+}
+
+message Shape {
+  string type = 1;
+  float dimension1 = 2;
+  float dimension2 = 3; // Optional for some shapes
+}
+
+message AreaResponse {
+  float area = 1;
+}
