@@ -6,7 +6,7 @@ This branch contains all the IaC (Infrastructure as Code) related to deploying t
 # How to Use
 ## Jenkins
 ### Pre-requisite
-- Docker
+- [Docker](https://docs.docker.com/engine/install/)
 
 ### Deployment
 Build the Docker image locally using
@@ -33,11 +33,11 @@ docker exec -it jenkins-blueocean cat  /var/lib/jenkins/secrets/initialAdminPass
 5. Navigate to Manage Jenkins > Plugins > Available plugins
 6. Search and download MSBuild Plugin and .NET SDK Support
 7. Navigate to Manage Jenkins > Tools > .NET SDK installations and use the following SDK configurations:
-- Name: .NET 8
-- .NET Version: .NET 8.0
-- Release: 8.0.1
-- SDK: 8.0.101
-- Platform: linux-x64 (Linux -x64)
+    - Name: .NET 8
+    - .NET Version: .NET 8.0
+    - Release: 8.0.1
+    - SDK: 8.0.101
+    - Platform: linux-x64 (Linux -x64)
 8. Save and Apply changes
 9. Restart the Jenkins container for changes to take effect:
 ```
