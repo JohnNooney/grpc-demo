@@ -52,14 +52,20 @@ dotnet start
 
 # Deployment
 ## Server
+Create the development certificates to enable SSL from the container
+```
+dotnet dev-certs https -ep ${HOME}/.aspnet/https/localhost.pfx -p <password>
+```
+- NOTE: If you want to connect a non-docker Client to the Docker Server, you will need to install this certificate locally as well. 
+
 Build the Docker image with the below command
 ```
-docker build -t mygrpcserver:1 .  
+docker build -t mygrpcserver:1 . 
 ```
 
-Create and start the Docker image with the below command
+Create and start the Docker image with the below command (make sure to use the same password from the created dev certificate)
 ```
-docker start --name grpcserver mygrpcserver:1 -p 8080:8080 -it
+docker run -rm --name grpcserver -p 8000:80 5001:443 -e ASPNETCORE_Kestrel__Certificates__Default__Password=<password> -v ${HOME}/.aspnet/https:/https/ mygrpcserver:1
 ```
 
 
