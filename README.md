@@ -17,14 +17,21 @@ code -r Server
 This will open a window of the Server in its own project space
 
 
-Then you will need to trust the HTTPS development certificate. Run this command:
+For running the server the first time, you will need to trust the HTTPS development certificate. Run this command:
 ```
 dotnet dev-certs https --trust
 ```
 - Select Yes to trust the development certificate.
 
+Build the server with this command
+```
+dotnet build
+```
 
-Press `Ctrl+F5` to run without the debugger
+Start the server with this command
+```
+dotnet start
+```
 
 ## Running the Client
 Open a terminal window at the root of the repo and run this command:
@@ -33,7 +40,26 @@ code -r Client
 ```
 This will open a window of the Server in its own project space
 
+Build the client with this command
+```
+dotnet build
+```
 
-Press `Ctrl+F5` to run without the debugger
+Start the client with this command
+```
+dotnet start
+```
+
+# Deployment
+## Server
+Build the Docker image with the below command
+```
+docker build -t mygrpcserver:1 .  
+```
+
+Create and start the Docker image with the below command
+```
+docker start --name grpcserver mygrpcserver:1 -p 8080:8080 -it
+```
 
 
