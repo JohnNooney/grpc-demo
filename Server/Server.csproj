@@ -4,6 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- follows Major.Minor.Patch -->
+    <PackageVersion>1.0.0-alpha1</PackageVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <!-- follows Major.Minor.Build.Revision -->
+    <FileVersion>1.0.0.0</FileVersion>   
   </PropertyGroup>
 
   <ItemGroup>
