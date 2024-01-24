@@ -23,8 +23,10 @@ pipeline {
                 }
             }
             steps {
-                script{
-                    DOCKER_IMAGE = docker.build DOCKER_REGISTRY+":$BUILD_NUMBER"
+                dir('Server/') {
+                    script {
+                        DOCKER_IMAGE = docker.build DOCKER_REGISTRY+":$BUILD_NUMBER"
+                    }
                 }
             }
         }
