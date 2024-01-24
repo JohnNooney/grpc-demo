@@ -1,15 +1,19 @@
 ﻿using System.Threading.Tasks;
 using Grpc.Net.Client;
 using Client;
+using System.Diagnostics.CodeAnalysis;
 
-// The port number must match the port of the gRPC server.
-using var channel = GrpcChannel.ForAddress("https://localhost:7104");
+class Program{
+    static async Task Main(string[] args)
+    {
+        string grpcAddress = Environment.GetEnvironmentVariable("GRPC_SERVER_ADDRESS") ?? "https://localhost:5001";
+        
+        using var channel = GrpcChannel.ForAddress(grpcAddress);
 
-var client = new Greeter.GreeterClient(channel);
+        Shape square = new Shape { Type = "square", Dimension1 = 2 };
+        ShapeSender shapeSenderClient = new ShapeSender(square, channel);
+        await shapeSenderClient.send();
+    }
+}
 
-var reply = await client.SayHelloAsync(
-                  new HelloRequest { Name = "John" });
 
-Console.WriteLine("Greeting: " + reply.Message);
-Console.WriteLine("Press any key to exit...");
-Console.ReadKey();
