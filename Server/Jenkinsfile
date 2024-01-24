@@ -30,7 +30,7 @@ pipeline {
                     sh "dotnet restore"
                     sh "dotnet build"
                 }
-                archiveArtifacts allowEmptyArchive: false, artifacts: 'Server\bin\Release\**', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
+                archiveArtifacts allowEmptyArchive: false, artifacts: 'Server\bin\Release\\**', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
             }
         }
 
