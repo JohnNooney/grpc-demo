@@ -9,20 +9,6 @@ pipeline {
     }
 
     stages {
-        stage ('gRPC Server Build - Checkout') {
- 	        checkout([
-                $class: 'GitSCM', 
-                branches: [[name: '*/shapes']], 
-                doGenerateSubmoduleConfigurations: false,
-                extensions: [], 
-                submoduleCfg: [],
-                userRemoteConfigs: [[
-                    credentialsId: '0dc1147d-8a9a-413c-9371-75e648a43f05', 
-                    url: 'https://github.com/JohnNooney/grpc-demo.git'
-                ]]
-            ]) 
-	    }
-
         stage('Build .NET') {
             steps {
                 script {
