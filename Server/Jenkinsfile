@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+    
+    environment {
+        DOCKER_REGISTRY = "default_registry"
+        IMAGE_NAME = "default_image"
+        DOTNET_VERSION = "8.0"
+    }
+
+    stages {
+        stage ('gRPC Server Build - Checkout') {
+ 	        checkout([
+                $class: 'GitSCM', 
+                branches: [[name: '*/shapes']], 
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [], 
+                submoduleCfg: [],
+                userRemoteConfigs: [[
+                    credentialsId: '0dc1147d-8a9a-413c-9371-75e648a43f05', 
+                    url: 'https://github.com/JohnNooney/grpc-demo.git'
+                ]]
+            ]) 
+	    }
+
+        stage('Build .NET') {
+            steps {
+                script {
+                    tool "dotnet-${DOTNET_VERSION}"
+                    sh "dotnet restore"
+                    sh "dotnet build"
+                    archiveArtifacts allowEmptyArchive: false, artifacts: 'Server\bin\Release\**', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
+                    script {
+                        sh "docker build -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest ."
+                    }
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
+                    script {
+                        sh "docker login -u ${DOCKER_REGISTRY_USERNAME} -p ${DOCKER_REGISTRY_PASSWORD}"
+                        sh "docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Build and deployment successful!"
+        }
+        failure {
+            echo "Build or deployment failed. Check the logs for more information."
+        }
+    }
+}
