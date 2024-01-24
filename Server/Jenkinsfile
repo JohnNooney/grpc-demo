@@ -5,17 +5,13 @@ pipeline {
         DOCKER_REGISTRY = "johnnoon74/grpc-server"
         DOCKER_REGISTRY_CREDENTIALS = "docker-hub-credentials"
         DOCKER_IMAGE = ""
-        DOTNET_VERSION = "8.0"
+        DOTNET_VERSION = ".NET 8"
     }
 
     stages {
         stage('Build .NET') {
             steps {
-                script {
-                    tool "dotnet-${DOTNET_VERSION}"
-                    sh "dotnet restore"
-                    sh "dotnet build"
-                }
+                dotnetBuild sdk: "${DOTNET_VERSION}", project: "Server/Server.csproj"
                 archiveArtifacts allowEmptyArchive: false, artifacts: 'Server/bin/Release/**', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
             }
         }
