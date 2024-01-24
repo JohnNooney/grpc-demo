@@ -9,11 +9,6 @@ This branch contains all the IaC (Infrastructure as Code) related to deploying t
 - [Docker](https://docs.docker.com/engine/install/)
 
 ### Deployment
-Build the Docker image locally using
-```
-docker build -t myjenkins-blueocean:2.426.2-1 .
-```
-
 Run the batch file to startup the container
 ```
 ./StartJenkins.bat
