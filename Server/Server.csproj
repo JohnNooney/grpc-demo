@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- follows Major.Minor.Patch -->
+    <PackageVersion>1.0.0-alpha1</PackageVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <!-- follows Major.Minor.Build.Revision -->
+    <FileVersion>1.0.0.0</FileVersion>   
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\shapes.proto" GrpcServices="Server" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+  </ItemGroup>
+
+</Project>
