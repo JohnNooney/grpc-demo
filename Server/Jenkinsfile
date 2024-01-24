@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build .NET') {
             steps {
-                dotnetBuild sdk: "${DOTNET_VERSION}", project: "Server/Server.csproj"
+                dotnetBuild sdk: "${DOTNET_VERSION}", project: "Server/Server.csproj", configuration: "Release"
                 archiveArtifacts allowEmptyArchive: false, artifacts: 'Server/bin/Release/**', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
             }
         }
