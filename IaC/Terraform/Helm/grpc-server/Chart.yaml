@@ -1,0 +1,4 @@
+apiVersion: v2
+name: grpc-server
+description: A Helm chart for deploying a containerized gRPC server
+version: 0.1.0

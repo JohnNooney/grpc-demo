@@ -1,0 +1,37 @@
+replicaCount: 1
+image:
+  repository: johnnoon74/grpc-server
+  tag: latest
+  pullPolicy: IfNotPresent
+
+dotnet:
+  certDefaultPass: "CRED_PLACEHOLDER"
+  certDefaultPath: /https/localhost.pfx
+  urls: "https://+;http://+"
+  httpsPorts: 443
+  environment: Development
+
+security:
+  cert: server-https-cert
+
+service:
+  type: LoadBalancer
+  port: 443
+  externalTrafficPolicy: Cluster
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+    beta.cloud.google.com/backend-config: '{"default": "grpc-backend-config"}'
+
+ingress:
+  enabled: true
+  className: "gce"
+  hosts:
+    - host: server.jonida.dev
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: grpc-server
+              port:
+                number: 443
