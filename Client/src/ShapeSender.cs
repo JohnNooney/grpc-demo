@@ -12,7 +12,7 @@ public class ShapeSender
         this.channel = channel;
     }
 
-    public async Task send()
+    public async Task Send()
     {
         var client = new AreaCalculator.AreaCalculatorClient(channel);
         var reply = await client.CalculateAreaAsync(shape);
