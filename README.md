@@ -18,10 +18,10 @@ TBD
 
 # Repository Structure
 This repository is structured as a mono-repo. In each folder at the root level you can find the relevant code and READMEs.
-- Client
-- Server
-- IaC 
-- Jenkins
+- [Client](./Client/)
+- [Server](./Server/)
+- [IaC](./IaC/)
+- [Jenkins](./Jenkins/)
 
 
 # Dev Pre-Req
@@ -34,7 +34,7 @@ To run code locally in Visual Studio
 To run the deployment pipeline you will need a GCP account and project to deploy to. Follow the steps mentioned here - [GCP Setup](#gcp-setup)
 
 # GCP Setup
-
+TBD
 
 
 
