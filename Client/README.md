@@ -26,6 +26,9 @@ dotnet start
 
 # Deployment
 ## Client
+**NOTE:** The below method for adding dotnet dev certs will not work within a local docker container setup. This is due to the certificate being defined for the local host but to the docker container, the real local host is a different address. So I recommend just running the client locally through the .exe build artifact. The below is just for example in case you can provide a different self-signed certificate, see [Generate self-signed certificates with .NET CLI](https://learn.microsoft.com/en-us/dotnet/core/additional-tools/self-signed-certificates-guide) for more examples.
+
+
 Create the development certificates (if not already done in the [Deployment - Server](../Server/README.md#deployment) steps)
 ```
 dotnet dev-certs https -ep ${HOME}/.aspnet/https/localhost.pfx -p <password>
