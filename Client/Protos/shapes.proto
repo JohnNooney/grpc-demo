@@ -16,4 +16,5 @@ message Shape {
 
 message AreaResponse {
   float area = 1;
+  string errorMessage = 2;
 }

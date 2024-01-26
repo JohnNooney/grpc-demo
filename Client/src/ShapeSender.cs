@@ -15,8 +15,15 @@ public class ShapeSender
     public async Task Send()
     {
         var client = new AreaCalculator.AreaCalculatorClient(channel);
-        var reply = await client.CalculateAreaAsync(shape);
+        var response = await client.CalculateAreaAsync(shape);
 
-        Console.WriteLine(shape.Type + " has an area of: " + reply.Area);
+        if (!string.IsNullOrEmpty(response.ErrorMessage))
+        {
+            Console.WriteLine($"Error: {response.ErrorMessage}");
+        } else
+        {
+            float area = response.Area;
+            Console.WriteLine($"{shape.Type} has an area of: {area}");
+        }
     }
 }
