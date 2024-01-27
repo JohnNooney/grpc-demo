@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Terraform init') {
+            dir('Terraform/') {
+                steps {
+                    sh 'terraform init'
+                }
+            }
+        }
+        stage('Terraform plan') {
+            dir('Terraform/') {
+                steps {
+                    sh 'terraform plan -out=tfplan'
+                    archiveArtifacts allowEmptyArchive: false, artifacts: 'Client/bin/Release/**', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
+                }
+            }
+        }
+        stage('Terraform apply') {
+            dir('Terraform/') {
+                steps {
+                    sh 'terraform apply --auto-approve tfplan' 
+                }
+            }
+        }
+        
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
