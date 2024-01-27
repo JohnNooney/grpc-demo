@@ -21,6 +21,7 @@ This repository is structured as a mono-repo. In each folder at the root level y
 - [Server](./Server/)
 - [IaC](./IaC/)
 - [Jenkins](./Jenkins/)
+- [Docs](./Docs)
 
 
 # Dev Setup
