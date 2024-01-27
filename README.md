@@ -23,7 +23,7 @@ This repository is structured as a mono-repo. In each folder at the root level y
 - [Jenkins](./Jenkins/)
 
 
-# Dev Pre-Req
+# Dev Setup
 To run code locally in Visual Studio
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [C# for Visual Studio Code (latest version)](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
