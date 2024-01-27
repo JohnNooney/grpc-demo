@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-server
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: grpc-server
+  template:
+    metadata:
+      labels:
+        app: grpc-server
+    spec:
+      containers:
+        - name: grpc-server
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: https
+              containerPort: 443
+              protocol: TCP
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value:{{ .Values.dotnet.urls }}
+            - name: ASPNETCORE_HTTPS_PORTS
+              value: {{ .Values.dotnet.httpsPorts }}
+            - name: ASPNETCORE_ENVIRONMENT
+              value: {{ .Values.dotnet.environment }}
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+              value: {{ .Values.dotnet.certDefaultPass }}
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+              value: {{ .Values.dotnet.certDefaultPath }}
+          volumes:
+            - name: https-cert
+              secret:
+                secretName: {{ .Values.security.cert }}

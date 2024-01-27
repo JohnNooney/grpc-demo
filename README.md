@@ -1,71 +1,40 @@
 # grpc-demo
-gRPC Demo Application with a C# client and server
+gRPC Demo Application with a C# client and server. The applications themselves are a simple interaction. The Client makes a request to the Server with the name of a shape and a give dimension. The Server responds with the area of that shape. Based on the shape, different area calculations are made. 
+
+In addition to the Client and Server applications, this project includes the Infrastructure as Code and documentation required to setup:
+- a Jenkins pipeline for the Client
+- a Jenkins pipeline for the  Server
+- a Jenkins pipeline for deploying the Server to GCP
+  - Terraform configuration for a GKE cluster that exposes the Server through a GLB
+
+**Scope**
+
+TBD
 
 
-# Pre-Req
-To run in Visual Studio
+**Objectives**
+
+TBD
+
+# Repository Structure
+This repository is structured as a mono-repo. In each folder at the root level you can find the relevant code and READMEs.
+- [Client](./Client/)
+- [Server](./Server/)
+- [IaC](./IaC/)
+- [Jenkins](./Jenkins/)
+
+
+# Dev Pre-Req
+To run code locally in Visual Studio
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [C# for Visual Studio Code (latest version)](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 
-## Running the Server
 
-Open a terminal window at the root of the repo and run this command:
-```
-code -r Server
-```
-This will open a window of the Server in its own project space
+To run the deployment pipeline you will need a GCP account and project to deploy to. Follow the steps mentioned here - [GCP Setup](#gcp-setup)
 
+# GCP Setup
+TBD
 
-For running the server the first time, you will need to trust the HTTPS development certificate. Run this command:
-```
-dotnet dev-certs https --trust
-```
-- Select Yes to trust the development certificate.
-
-Build the server with this command
-```
-dotnet build
-```
-
-Start the server with this command
-```
-dotnet start
-```
-
-## Running the Client
-Open a terminal window at the root of the repo and run this command:
-```
-code -r Client
-```
-This will open a window of the Server in its own project space
-
-Build the client with this command
-```
-dotnet build
-```
-
-Start the client with this command
-```
-dotnet start
-```
-
-# Deployment
-## Server
-Create the development certificates to enable SSL from the container
-```
-dotnet dev-certs https -ep ${HOME}/.aspnet/https/localhost.pfx -p <password>
-```
-- NOTE: If you want to connect a non-docker Client to the Docker Server, you will need to install this certificate locally as well. 
-
-Build the Docker image with the below command
-```
-docker build -t mygrpcserver:1 . 
-```
-
-Create and start the Docker image with the below command (make sure to use the same password from the created dev certificate)
-```
-docker run -rm --name grpcserver -p 8000:80 5001:443 -e ASPNETCORE_Kestrel__Certificates__Default__Password=<password> -v ${HOME}/.aspnet/https:/https/ mygrpcserver:1
-```
 
 
