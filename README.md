@@ -15,6 +15,12 @@ In addition to the Client and Server applications, this project includes the Inf
 - A Jenkins pipeline will be responsible for deploying the Docker server to a simple GKE cluster through a Terraform and Helm configuration
 - The GKE cluster will be a single node cluster containing a helm deployed pod, service, and ingress.
 
+
+**Application Architecture**
+See the below diagram for what the goal architecture is:
+![Complete Project Architecture](./Docs/Complete-Architecture.drawio)
+**NOTE:** At the moment this application only supports the C# Client. The Python client is shown here to demonstrate the extensibiility option of this project.
+
 # Repository Structure
 This repository is structured as a mono-repo. In each folder at the root level you can find the relevant code and READMEs.
 - [Client](./Client/) - gRPC Client source code

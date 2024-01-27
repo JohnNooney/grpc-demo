@@ -4,6 +4,14 @@ This folder contains all the CI/CD IaC related to deploying the gRPC Demo applic
 - Instructions below on what post-deployment configurations/setup are required
 
 
+The Client and Server build pipelines are seen below:
+![Application Build Pipelines](../Docs/App%20Build%20Pipeline.png)
+
+
+The Terraform deployment build pipeline can be seen below:
+![Add Deployment Pipeline](../Docs/App%20Deployment%20Pipeline.png)
+
+
 # Pre-requisite
 - [Docker](https://docs.docker.com/engine/install/)
 

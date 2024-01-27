@@ -7,7 +7,9 @@ This Terraform configuration will provision the following:
 - The gRPC Server Application and a load balancer
 
 ## Architecture
-TBD
+See the below diagram of the deployed architecture:
+![GCP Architecture Diagram](../Docs/GCP%20Architecture.png)
+
 
 # Deployment
 ### Manual
