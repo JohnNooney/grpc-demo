@@ -4,13 +4,12 @@ This folder contains all the CI/CD IaC related to deploying the gRPC Demo applic
 - Instructions below on what post-deployment configurations/setup are required
 
 
-The Client and Server build pipelines are seen below:
-<img width="506" alt="image" src="https://github.com/JohnNooney/grpc-demo/assets/71711553/d982bfdc-0e2a-43bf-8832-ab2849d1dfc4">
-
-
-
-The Terraform deployment build pipeline can be seen below:
+The **Client and Server** build pipelines are seen below:
 <img width="651" alt="image" src="https://github.com/JohnNooney/grpc-demo/assets/71711553/9ed0379d-ffc3-4708-9827-d020acc4091b">
+
+
+The **Terraform** deployment build pipeline can be seen below:
+<img width="506" alt="image" src="https://github.com/JohnNooney/grpc-demo/assets/71711553/d982bfdc-0e2a-43bf-8832-ab2849d1dfc4">
 
 
 
