@@ -18,7 +18,7 @@ In addition to the Client and Server applications, this project includes the Inf
 
 **Application Architecture**
 See the below diagram for what the goal architecture is:
-![Complete Project Architecture](./Docs/Complete-Architecture.drawio)
+![Complete Project Architecture](./Docs/Complete%20Architecture.png)
 **NOTE:** At the moment this application only supports the C# Client. The Python client is shown here to demonstrate the extensibiility option of this project.
 
 # Repository Structure
