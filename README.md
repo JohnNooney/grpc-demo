@@ -45,12 +45,21 @@ To run the deployment pipeline you will need a GCP account and project to deploy
 - Download the JSON key file for the service account. This will be used for the Jenkins pipeline setup. See [Jenkins - Credentials - GCP](./Jenkins/README.md#gcp)
 
 
-### Enable GKE API
+### Enable APIs
+#### GKE
 - In the GCP Console, navigate to the API & Services > Dashboard.
-- Enable the Kubernetes Engine API for the project.
+- Search for and enable the Kubernetes Engine API
+
 
 ### Deployment
 - Follow the steps here [IaC](./IaC/README.md)
+
+
+# Future Improvements
+- HTTPs communication so Server and Client services can communicate securely.
+- Introduce an Ansible vault to store secrets
+- Add a domain to the Server for accessability and CA signed certificates
+- Add more Client applications written in different languages to demonstrate the adapability of grpc
 
 
 
