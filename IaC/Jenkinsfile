@@ -13,7 +13,7 @@ pipeline {
             dir('Terraform/') {
                 steps {
                     sh 'terraform plan -out=tfplan'
-                    archiveArtifacts allowEmptyArchive: false, artifacts: 'Client/bin/Release/**', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
+                    archiveArtifacts allowEmptyArchive: false, artifacts: './tfplan', caseSensitive: true, defaultExcludes: true, fingerprint: false, onlyIfSuccessful: true
                 }
             }
         }
