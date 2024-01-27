@@ -17,11 +17,11 @@ In addition to the Client and Server applications, this project includes the Inf
 
 # Repository Structure
 This repository is structured as a mono-repo. In each folder at the root level you can find the relevant code and READMEs.
-- [Client](./Client/)
-- [Server](./Server/)
-- [IaC](./IaC/)
-- [Jenkins](./Jenkins/)
-- [Docs](./Docs)
+- [Client](./Client/) - gRPC Client source code
+- [Server](./Server/) - gRPC Server source code
+- [IaC](./IaC/) - Terraform and Helm deployment configurations (with additional GCP setup instructions)
+- [Jenkins](./Jenkins/) - Jenkins deployment configurations and setup
+- [Docs](./Docs) - Diagrams of the project pipeline and architecture
 
 
 # Dev Setup
