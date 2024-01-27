@@ -8,7 +8,7 @@ This Terraform configuration will provision the following:
 
 ## Architecture
 See the below diagram of the deployed architecture:
-![GCP Architecture Diagram](../Docs/GCP%20Architecture.png)
+<img width="534" alt="image" src="https://github.com/JohnNooney/grpc-demo/assets/71711553/069acf77-a5b1-4589-b0fc-e783f9c54cec">
 
 
 # Deployment
