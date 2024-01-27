@@ -15,11 +15,6 @@ In addition to the Client and Server applications, this project includes the Inf
 - A Jenkins pipeline will be responsible for deploying the Docker server to a simple GKE cluster through a Terraform and Helm configuration
 - The GKE cluster will be a single node cluster containing a helm deployed pod, service, and ingress.
 
-
-**Objectives**
-
-TBD
-
 # Repository Structure
 This repository is structured as a mono-repo. In each folder at the root level you can find the relevant code and READMEs.
 - [Client](./Client/)
