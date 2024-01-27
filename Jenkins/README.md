@@ -96,7 +96,8 @@ Create and download the JSON service account key
     - JSON key file: (upload your download key from [GCP Setup](../README.md#gcp-setup))
 4. Create
 
-### Server Pipeline
+### Pipeline Setup
+#### Server
 1. From the Dashboard create a New item
 2. Select Pipeline and use the following configurations:
     - Description: Pipeline for the gRPC Server
@@ -113,7 +114,7 @@ Create and download the JSON service account key
     - Script Path: Server/Jenkinsfile
 3. Save
 
-### Client Pipeline
+#### Client
 1. From the Dashboard create a New item
 2. Select Pipeline and use the following configurations:
     - Description: Pipeline for the gRPC Server
@@ -130,7 +131,7 @@ Create and download the JSON service account key
     - Script Path: Client/Jenkinsfile
 3. Save
 
-### Terraform Pipeline
+#### Terraform
 1. From the Dashboard create a New item
 2. Select Pipeline and use the following configurations:
     - Description: Pipeline for the Terraform deployment
