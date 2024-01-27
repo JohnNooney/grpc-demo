@@ -18,7 +18,7 @@ In addition to the Client and Server applications, this project includes the Inf
 
 **Application Architecture**
 See the below diagram for what the goal architecture is:
-![Complete Project Architecture](./Docs/Complete%20Architecture.png)
+<img width="774" alt="image" src="https://github.com/JohnNooney/grpc-demo/assets/71711553/2b2e4e06-df41-42e1-a3c7-a8dc592b0f65">
 **NOTE:** At the moment this application only supports the C# Client. The Python client is shown here to demonstrate the extensibiility option of this project.
 
 # Repository Structure
