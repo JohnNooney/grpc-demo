@@ -4,7 +4,7 @@ using Client;
 using System.Diagnostics.CodeAnalysis;
 
 class Program{
-    static private string grpcAddress = Environment.GetEnvironmentVariable("GRPC_SERVER_ADDRESS") ?? "https://localhost";
+    static private string grpcAddress = Environment.GetEnvironmentVariable("GRPC_SERVER_ADDRESS") ?? "http://localhost";
     
     static async Task Main(string[] args)
     {
