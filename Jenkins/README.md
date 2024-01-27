@@ -27,7 +27,7 @@ docker exec -it jenkins-blueocean cat  /var/lib/jenkins/secrets/initialAdminPass
 
 ### Plugins
 5. Navigate to Manage Jenkins > Plugins > Available plugins
-6. Search and download **MSBuild Plugin**, **Terraform Plugin**, **GCP Secrets Manager Credentials Provider**, and **.NET SDK Support**
+6. Search and download **MSBuild Plugin**, **Terraform Plugin**, **GCP Secrets Manager Credentials Provider**, **Google Kubernetes Engine**, and **.NET SDK Support**
 7. Navigate to Manage Jenkins > Tools > .NET SDK installations and use the following SDK configurations:
     - Name: .NET 8
     - .NET Version: .NET 8.0
@@ -67,15 +67,33 @@ docker restart jenkins-blueocean
 
 #### GCP
 **Pre-requisite**
-You will need to have a GCP account with a project and IAM secrets ready. See [../README.md#gcp-setup]
+You will need to have a GCP account with a project and Service Account key exported. See [GCP Setup](../README.md#gcp-setup) for how to do this.
+
+Create the Jenkins service account and grant source and GKE roles to it. In the GCP console web app > Activate Cloud Shell and run the below commands:
+```
+export SA=jenkins-sa
+export SA_EMAIL=${SA}@${PROJECT_ID}.iam.gserviceaccount.com
+
+gcloud iam service-accounts create $SA
+
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SA_EMAIL  --role roles/source.writer
+
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SA_EMAIL --role roles/container.developer
+```
+
+Create and download the JSON service account key
+```
+  gcloud iam service-accounts keys create ~/jenkins-gke-key.json --iam-account $SA_EMAIL
+```
 
 1. Navigate to Manage Jenkins > Credentials
 2. Select System Store > Global credentials (unrestricted)
 3. Add Credentials and configure with:
-    - Username: `Your_Docker_Username`
-    - Password: `Your_Docker_Password`
-    - ID: `docker-hub-credentials`
-    - Description: Jenkins GCP Credentials
+    - Kind: Google Service Account from private key
+    - ID: `grpc-google-sa`
+    - Description: GCP Service Account private key
+    - Project Name: your-project-name (see steps done in [GCP Setup](../README.md#gcp-setup))
+    - JSON key file: (upload your download key from [GCP Setup](../README.md#gcp-setup))
 4. Create
 
 ### Server Pipeline
@@ -91,7 +109,7 @@ You will need to have a GCP account with a project and IAM secrets ready. See [.
         - Repository URL: https://github.com/JohnNooney/grpc-demo.git
         - Credentials: Jenkins Git Credentials
       - Branches to build:
-        - Branch Specified: */shapes
+        - Branch Specified: */main
     - Script Path: Server/Jenkinsfile
 3. Save
 
@@ -108,6 +126,38 @@ You will need to have a GCP account with a project and IAM secrets ready. See [.
         - Repository URL: https://github.com/JohnNooney/grpc-demo.git
         - Credentials: Jenkins Git Credentials
       - Branches to build:
-        - Branch Specified: */shapes
+        - Branch Specified: */main
     - Script Path: Client/Jenkinsfile
 3. Save
+
+### Terraform Pipeline
+1. From the Dashboard create a New item
+2. Select Pipeline and use the following configurations:
+    - Description: Pipeline for the Terraform deployment
+    - Discard old builds with Max # of builds to keep: 5
+    - Do not allow concurrent builds
+    - Pipeline:
+      - Definition: Pipeline script from SCM
+      - SCM: Git
+      - Repositories:
+        - Repository URL: https://github.com/JohnNooney/grpc-demo.git
+        - Credentials: Jenkins Git Credentials
+      - Branches to build:
+        - Branch Specified: */main
+    - Script Path: IaC/Jenkinsfile
+3. Save
+
+# Teardown
+Run the below commands to completely teardown your Jenkins deployment and remove any resources:
+```
+docker rm -f jenkins-blueocean
+docker rm - jenkins-docker
+docker rmi myjenkins-blueocean
+docker rmi docker:dind
+docker volume rm jenkins-data 
+docker volume rm jenkins-docker-certs
+docker network rm jenkins
+```
+
+# Resources 
+- https://cloud.google.com/kubernetes-engine/docs/archive/continuous-delivery-jenkins-kubernetes-engine
