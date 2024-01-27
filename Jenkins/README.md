@@ -67,7 +67,7 @@ docker restart jenkins-blueocean
 
 #### GCP
 **Pre-requisite**
-You will need to have a GCP account with a project and Service Account key exported. See [GCP Setup](../README.md#gcp-setup) for how to do this.
+You will need to have a GCP account with a project and Service Account key exported.
 
 Create the Jenkins service account and grant source and GKE roles to it. In the GCP console web app > Activate Cloud Shell and run the below commands:
 ```
@@ -85,7 +85,7 @@ Create and download the JSON service account key
 ```
   gcloud iam service-accounts keys create ~/jenkins-gke-key.json --iam-account $SA_EMAIL
 ```
-
+**Create Jenkins Credential**
 1. Navigate to Manage Jenkins > Credentials
 2. Select System Store > Global credentials (unrestricted)
 3. Add Credentials and configure with:
