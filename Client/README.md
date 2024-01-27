@@ -1,5 +1,14 @@
 # Overview
-TBD
+This is a simple C# gRPC client application. When ran it will prompt the user for a shape input and a corresponding dimension. Depending on the shape it will ask for a second dimension and then send a gRPC request to the Server for a response on what the area of the shape is.
+
+
+Currently the Client only supports 3 shapes:
+- circle
+- rectangle
+- square
+
+
+Additionaly, it implements a single Potocol Buffer from the server: `shapes.proto`
 
 # Local Dev Setup Pre-Req
 To run code locally in Visual Studio
@@ -25,7 +34,6 @@ Start the client with this command
 |```dotnet start```| ```./bin/net8.0/Client.exe``` |
 
 
-
 # Deployment
 ## Client
 **NOTE:** The below method for adding dotnet dev certs will not work within a local docker container setup. This is due to the certificate being defined for the local host but to the docker container, the real local host is a different address. So I recommend just running the client locally through the .exe build artifact. The below is just for example in case you can provide a different host address for the self-signed certificate, see [Generate self-signed certificates with .NET CLI](https://learn.microsoft.com/en-us/dotnet/core/additional-tools/self-signed-certificates-guide) for more examples.
@@ -43,7 +51,7 @@ docker build -t my-grpc-client:1 .
 
 Create and start the Docker image with the below command (make sure to use the same password from the created dev certificate)
 ```
-docker run -it --name grpc-client -e GRPC_SERVER_ADDRESS="https://grpc-server" -e CERT_PASS=<password> -v ${HOME}/.aspnet/https:/https/ my-grpc-client:1
+docker run -it --name grpc-client -e GRPC_SERVER_ADDRESS="https://host.docker.internal" -e CERT_PASS=<password> -v ${HOME}/.aspnet/https:/https/ my-grpc-client:1
 ```
 
 # Deployment Clean Up
