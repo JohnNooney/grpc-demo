@@ -59,6 +59,7 @@ resource "google_container_node_pool" "primary_nodes" {
       disable-legacy-endpoints = "true"
     }
   }
+}
 
   resource "kubernetes_namespace" "grpc_demo" {
   metadata {
