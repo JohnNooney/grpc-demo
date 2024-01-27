@@ -9,7 +9,7 @@ variable "gke_password" {
 }
 
 variable "gke_num_nodes" {
-  default     = 2
+  default     = 1
   description = "number of gke nodes"
 }
 
@@ -41,8 +41,10 @@ resource "google_container_node_pool" "primary_nodes" {
   
   version = data.google_container_engine_versions.gke_version.release_channel_latest_version["STABLE"]
   node_count = var.gke_num_nodes
-
+  
   node_config {
+    disk_size_gb = 50
+
     oauth_scopes = [
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
@@ -52,30 +54,17 @@ resource "google_container_node_pool" "primary_nodes" {
       env = var.project_id
     }
 
-    # preemptible  = true
-    machine_type = "n1-standard-1"
-    tags         = ["gke-node", "${var.project_id}-gke"]
+    machine_type = "e2-standard-2"
+    tags = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
     }
   }
 }
 
-  resource "kubernetes_namespace" "grpc_demo" {
+resource "kubernetes_namespace" "grpc_demo" {
   metadata {
     name = "grpc-demo"
-  }
-}
-
-resource "kubernetes_secret" "server_tls_secret" {
-  metadata {
-    name      = "rpc-server-tls-secret"
-    namespace = kubernetes_namespace.grpc_demo.metadata[0].name
-  }
-
-  data = {
-    tls.crt = base64encode(file("path/to/your/certificate.crt")) # TODO: figure out what goes here
-    tls.key = base64encode(file("path/to/your/private-key.key"))
   }
 }
 
