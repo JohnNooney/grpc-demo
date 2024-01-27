@@ -1,5 +1,17 @@
 # Overview
-TBD
+This is a simple C# gRPC server application. When ran it will accept a `Shape` object and respond with an `AreaResponse` object, which should return to the client a calculated area based on the dimensions of the shape. If the server is unable to calculate the dimensions for the provided shape then it will respond with a corresponding error response.
+
+
+Currently the Server only supports 3 shapes:
+- circle
+- rectangle
+- square
+
+## APIs
+| Method | Input | Response | Notes |
+|-|-|-|-|
+| `CalculateArea` | `Shape` | `AreaResponse` | If shape or dimensions are inavlid a corresponding `errorMessage` is returned. See [shapes.proto](./Protos/shapes.proto) |
+
 
 # Local Dev Setup Pre-Req
 To run code locally in Visual Studio
