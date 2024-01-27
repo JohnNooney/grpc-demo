@@ -9,7 +9,11 @@ In addition to the Client and Server applications, this project includes the Inf
 
 **Scope**
 
-TBD
+- The Server application will only implement one Protocol Buffer: Shapes. This is was done so the project can demonstrate a simple interaction between a given Client and Server
+- The Client application uses the Shapes Protocol Buffer and implements a user input mechanism
+- Jenkins pipelines will build the server and client and produce a build artifact in the form of a Docker image
+- A Jenkins pipeline will be responsible for deploying the Docker server to a simple GKE cluster through a Terraform and Helm configuration
+- The GKE cluster will be a single node cluster containing a helm deployed pod, service, and ingress.
 
 
 **Objectives**
@@ -31,10 +35,26 @@ To run code locally in Visual Studio
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 
-To run the deployment pipeline you will need a GCP account and project to deploy to. Follow the steps mentioned here - [GCP Setup](#gcp-setup)
+To run the deployment pipeline you will need a GCP account and project to deploy to. Follow the steps mentioned here - [GCP Setup](#gcp-setup) and [Jenkins - First Time Setup](./Jenkins/README.md#first-time-setup)
 
 # GCP Setup
-TBD
+### Create a GCP Account and Project
+- Visit the Google Cloud Console.
+- Follow the prompts to create a new GCP account if you don't have one.
+- Create a new GCP project for the application.
+- **NOTE:** A new GCP user will have $200 to use which should be more than enough for this sample project. 
+
+### Configure GCP Authentication
+- Generate service account credentials with the necessary permissions to interact with GCP services.
+- Download the JSON key file for the service account. This will be used for the Jenkins pipeline setup. See [Jenkins - Credentials - GCP](./Jenkins/README.md#gcp)
+
+
+### Enable GKE API
+- In the GCP Console, navigate to the API & Services > Dashboard.
+- Enable the Kubernetes Engine API for the project.
+
+### Deployment
+- Follow the steps here [IaC](./IaC/README.md)
 
 
 
