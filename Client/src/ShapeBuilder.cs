@@ -2,7 +2,7 @@ using Client;
 
 public class ShapeBuilder
 {
-    public Result<Shape, string> BuildShape()
+    public Result<Shape, string> BuildShapeFromInput()
     {
         Console.Write("Enter the shape type: ");
         string shapeType = Console.ReadLine()?.ToLower() ?? string.Empty;
@@ -31,6 +31,7 @@ public class ShapeBuilder
             shape.Dimension2 = dimension2;
         }
 
+        Console.Write("\n");
         return Result<Shape, string>.Success(shape);
     }
 

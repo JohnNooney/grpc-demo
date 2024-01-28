@@ -9,7 +9,7 @@ class Program{
     static async Task Main(string[] args)
     {
         ShapeBuilder shapeBuilder = new ShapeBuilder();
-        Result<Shape, string> result = shapeBuilder.BuildShape();
+        Result<Shape, string> result = shapeBuilder.BuildShapeFromInput();
         
         if (result.IsSuccess)
         {
@@ -19,6 +19,9 @@ class Program{
             new GrpcChannelOptions { HttpHandler = channelHelper.GetHttpClientHandler() });
             
             ShapeSender shapeSenderClient = new ShapeSender(result.Value, channel);
+
+            Console.WriteLine("Sending shape to server to calculate area... \n");
+
             await shapeSenderClient.Send();
         } else {
             Console.WriteLine(result.Error);
