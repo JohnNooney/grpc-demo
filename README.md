@@ -7,7 +7,6 @@ Client:
 Enter the shape type: square 
 Enter the primary dimension: 5
 
-Certificate not specified. Proceeding with default configuration. 
 Sending shape to server to calculate area... 
 
 square has an area of: 25
