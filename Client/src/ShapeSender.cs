@@ -23,7 +23,7 @@ public class ShapeSender
         } else
         {
             float area = response.Area;
-            Console.WriteLine($"{shape.Type} has an area of: {area}");
+            Console.WriteLine($"{shape.Type} has an area of: {area} \n");
         }
     }
 }

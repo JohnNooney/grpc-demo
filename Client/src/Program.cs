@@ -8,24 +8,26 @@ class Program{
     
     static async Task Main(string[] args)
     {
-        ShapeBuilder shapeBuilder = new ShapeBuilder();
-        Result<Shape, string> result = shapeBuilder.BuildShapeFromInput();
-        
-        if (result.IsSuccess)
-        {
-            GrpcChannelHelper channelHelper = new GrpcChannelHelper();
-            
-            using var channel = GrpcChannel.ForAddress(grpcAddress, 
-            new GrpcChannelOptions { HttpHandler = channelHelper.GetHttpClientHandler() });
-            
-            ShapeSender shapeSenderClient = new ShapeSender(result.Value, channel);
+        GrpcChannelHelper channelHelper = new GrpcChannelHelper();
+                
+        using var channel = GrpcChannel.ForAddress(grpcAddress, 
+        new GrpcChannelOptions { HttpHandler = channelHelper.GetHttpClientHandler() });
 
-            Console.WriteLine("Sending shape to server to calculate area... \n");
+        while(true){
+            ShapeBuilder shapeBuilder = new ShapeBuilder();
+            Result<Shape, string> result = shapeBuilder.BuildShapeFromInput();
+            
+            if (result.IsSuccess)
+            {
+                ShapeSender shapeSenderClient = new ShapeSender(result.Value, channel);
 
-            await shapeSenderClient.Send();
-        } else {
-            Console.WriteLine(result.Error);
-        }   
+                Console.WriteLine("Sending shape to server to calculate area... \n");
+
+                await shapeSenderClient.Send();
+            } else {
+                Console.WriteLine(result.Error);
+            }   
+        }
     }
 }
 
